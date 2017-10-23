@@ -2,14 +2,23 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.technique.tools</groupId>
-    <artifactId>elb_log_analyzer</artifactId>
-    <version>1.0.0</version>
-    <packaging>jar</packaging>
+    <groupId>com.technique.tools.elb_log_analyzer</groupId>
+    <artifactId>parent</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <description>
+        Parent project for log analyzer tool
+    </description>
+
+    <modules>
+        <module>lib-parser</module>
+        <module>app-summary</module>
+        <module>app-elasticsearch</module>
+    </modules>
 
 
     <properties>
-        <!-- build configuration props, because Maven can't pick a sensible default -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -19,6 +28,7 @@
     </properties>
 
 
+    <!-- these dependencies are used by all child modules -->
     <dependencies>
         <dependency>
             <groupId>log4j</groupId>
@@ -35,7 +45,6 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -55,27 +64,6 @@
                     <target>1.8</target>
                     <debug>true</debug>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <createDependencyReducedPom>false</createDependencyReducedPom>
-                            <transformers>
-                                <transformer
-                                    implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.technique.tools.elb_log_analyzer.ELBLogAnalyzer</mainClass>
-                                </transformer>
-                            </transformers>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

@@ -1,4 +1,4 @@
-package com.technique.tools.elb_log_analyzer;
+package com.technique.tools.elb_log_analyzer.summary;
 
 import java.io.BufferedReader;
 import java.io.File;

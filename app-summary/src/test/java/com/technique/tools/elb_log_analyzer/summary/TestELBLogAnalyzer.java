@@ -1,7 +1,9 @@
-package com.technique.tools.elb_log_analyzer;
+package com.technique.tools.elb_log_analyzer.summary;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+
+import com.technique.tools.elb_log_analyzer.summary.ELBLogAnalyzer;
 
 
 public class TestELBLogAnalyzer {

@@ -17,6 +17,11 @@
 
 
     <dependencies>
+        <dependency>
+            <groupId>net.sf.kdgcommons</groupId>
+            <artifactId>kdgcommons</artifactId>
+            <version>${net.sf.kdgcommons.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

@@ -24,6 +24,7 @@
 
         <junit.version>4.12</junit.version>
         <log4j.version>1.2.17</log4j.version>
+        <net.sf.kdgcommons.version>1.0.15</net.sf.kdgcommons.version>
         <slf4j.version>1.7.13</slf4j.version>
     </properties>
 

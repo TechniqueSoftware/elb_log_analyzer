@@ -35,10 +35,10 @@ public class LogDataParser {
         {
             result.timestamp                = parseTimestamp();
             result.elbId                    = parseString();
-            result.clientIp                 = parseString(':');
-            result.clientPort               = parseString();
-            result.targetIp                 = parseString(':');
-            result.targetPort               = parseString();
+            result.clientIp                 = parseTargetHost();
+            result.clientPort               = parseTargetIp();
+            result.targetIp                 = parseTargetHost();
+            result.targetPort               = parseTargetIp();
             result.request_processing_time  = parseDouble();
             result.target_processing_time   = parseDouble();
             result.response_processing_time = parseDouble();
@@ -90,22 +90,6 @@ public class LogDataParser {
         return token;
     }
 
-
-    /**
-     *  Parses a string field that is delimited by something other
-     *  than a space. This can never happen at the end of the input
-     *  line, so it's an exception if that happens.
-     */
-    private String parseString(char delimiter)
-    {
-        String token = nextToken(delimiter);
-        if (curPos == logLine.length())
-        {
-            throw new IllegalStateException("end-of-input reached before expected delimiter (" + delimiter +")");
-        }
-        lastPos = curPos;
-        return token;
-    }
 
     /**
      *  Parses a quote-delimited string that is followed by either a space or end-of-input.
@@ -180,6 +164,41 @@ public class LogDataParser {
         {
             throw new IllegalStateException("expected double, was \"" + token + "\"");
         }
+    }
+
+
+    /**
+     *  Parses the IP address portion of a host reference. Recognizes that "-"
+     *  signals an invalid request, and leaves it for {#link parseHostPort}
+     *  (and returns null).
+     */
+    private String parseTargetHost()
+    {
+        String token = nextToken(':');
+        if (token.startsWith("-"))
+        {
+            curPos = lastPos;
+            return null;
+        }
+        else
+        {
+            lastPos = curPos;
+            return token;
+        }
+    }
+
+
+    /**
+     *  Parses the port portion of a host reference. Recognizes that "-" signals
+     *  an invalid request and returns null.
+     */
+    private String parseTargetIp()
+    {
+        String token = nextToken(' ');
+        lastPos = curPos;
+        return (token.startsWith("-"))
+             ? null
+             : token;
     }
 
 

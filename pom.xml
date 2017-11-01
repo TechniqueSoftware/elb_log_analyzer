@@ -12,7 +12,7 @@
     </description>
 
     <modules>
-        <module>lib-parser</module>
+        <module>lib-common</module>
         <module>app-summary</module>
         <module>app-elasticsearch</module>
     </modules>

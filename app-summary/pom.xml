@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>com.technique.tools.elb_log_analyzer</groupId>
-            <artifactId>lib-parser</artifactId>
+            <artifactId>lib-common</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
